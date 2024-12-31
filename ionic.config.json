@@ -1,0 +1,7 @@
+{
+  "name": "GasByGas-Mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
