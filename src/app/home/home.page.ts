@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+import { ModalController } from '@ionic/angular';
+
+import { NewReqiestComponent } from './new-reqiest/new-reqiest.component';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -8,6 +13,25 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  message = 'This modal example uses the modalController to present and dismiss modals.';
+
+  constructor(private modalCtrl: ModalController) {}
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: NewReqiestComponent,
+      componentProps: {
+        name: 'testing',
+      },
+      mode: 'ios'
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      this.message = `Hello, ${data}!`;
+    }
+  }
 
 }

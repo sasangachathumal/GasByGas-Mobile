@@ -1,0 +1,15 @@
+.flex {
+  display: flex;
+}
+
+.main-menu-card {
+  ion-card-content {
+    ion-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      align-content: center;
+      flex-direction: row;
+    }
+  }
+}
