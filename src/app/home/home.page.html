@@ -1,19 +1,14 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<ion-content [fullscreen]="true">
+<ion-content class="content">
   <ion-grid>
     <ion-row>
-      <ion-col>Logo</ion-col>
+      <ion-col class="logo-container">
+        <ion-img style="width: 60%" class="ion-padding" src="../../assets/img/logo.png"
+          alt="GasByGas Logo"></ion-img>
+      </ion-col>
     </ion-row>
     <ion-row class="ion-no-padding ion-no-margin">
       <ion-col class="ion-no-padding ion-no-margin">
-        <ion-card [mode]="'ios'" [button]="true" class="main-menu-card" (click)="openModal()">
+        <ion-card color="warning" [mode]="'ios'" [button]="true" class="main-menu-card" (click)="openModal()">
           <ion-card-content class="home-card-content">
             <ion-icon name="add-outline" size="large"></ion-icon>
             <p>New Gas Request</p>
@@ -23,7 +18,7 @@
     </ion-row>
     <ion-row class="ion-no-padding ion-no-margin">
       <ion-col class="ion-no-padding ion-no-margin">
-        <ion-card [mode]="'ios'" [button]="true" class="main-menu-card">
+        <ion-card color="warning" [mode]="'ios'" [button]="true" class="main-menu-card" [routerLink]="['/home/myRequest']">
           <ion-card-content class="home-card-content">
             <ion-icon name="file-tray-full-outline" size="large"></ion-icon>
             <p>My Gas Requests</p>
@@ -33,3 +28,14 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer mode="ios">
+  <ion-toolbar>
+      <ion-card color="medium" [mode]="'ios'" [button]="true" class="main-menu-card" [routerLink]="['/login']">
+        <ion-card-content class="home-card-content">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <p>Logout</p>
+        </ion-card-content>
+      </ion-card>
+  </ion-toolbar>
+</ion-footer>

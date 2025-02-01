@@ -1,14 +1,13 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button color="danger" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
     <ion-title>New Request</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding" mode="ios">
-  {{name}}
-  <ion-list lines="full">
+<ion-content class="ion-padding content" mode="ios">
+  <ion-list lines="full" class="">
     <ion-item>
       <ion-select label="Select Gas Outlet" aria-label="outlet">
         <ion-select-option value="apples">Apples</ion-select-option>
@@ -38,5 +37,5 @@
       <ion-input label="Total Payment" value="2000.00 LKR" readonly [disabled]="true"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="block">Block</ion-button>
+  <ion-button expand="block" class="ion-margin-top" color="warning">Submit</ion-button>
 </ion-content>

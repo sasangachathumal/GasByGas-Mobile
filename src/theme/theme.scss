@@ -13,3 +13,12 @@
     }
   }
 }
+
+ion-content.content{
+  --background: url('../assets/img/Phone-Wallpaper.png') 0 0/100% 100% no-repeat;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
