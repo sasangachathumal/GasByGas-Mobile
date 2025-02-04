@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://jsonplaceholder.typicode.com'
+  apiUrl: 'https://44f7-2402-d000-8104-14fe-9c8b-80a0-d694-626d.ngrok-free.app/api/v1',
+  webAppUrl: 'https://44f7-2402-d000-8104-14fe-9c8b-80a0-d694-626d.ngrok-free.app'
 };
 
 /*

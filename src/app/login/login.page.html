@@ -1,40 +1,46 @@
-<ion-content class="content">
+<ion-content class="content" [forceOverscroll]="false">
   <ion-grid>
     <ion-row>
       <ion-col class="logo-container">
-        <ion-img style="width: 50%" mode="ios" class="ion-padding" src="../../assets/img/logo.png" alt="GasByGas Logo"></ion-img>
+        <ion-img style="width: 50%" mode="ios" class="ion-padding" src="../../assets/img/logo.png"
+          alt="GasByGas Logo"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-col class="ion-padding">
-        <h2>Welcome Back</h2>
-        <p>Enter account credentials to login</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-margin-bottom">
-      <ion-col>
-        <ion-list mode="ios">
-          <ion-item>
-            <ion-input mode="ios" label="Email" labelPlacement="floating" placeholder="Enter Your Email"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input mode="ios" label="Password" labelPlacement="floating" placeholder="Enter Your Password"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-margin-top">
-      <ion-col class="ion-padding">
-        <ion-button mode="ios" expand="block" color="warning" [routerLink]="['/home']">LOGIN</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-padding">
-        <p>Problem in login <a href="#" [routerLink]="['/forget-password']">Forget Password</a></p>
-        <p class="ion-padding-top">No account yet <a href="#">Register</a></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form [formGroup]="loginForm">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-padding">
+          <h2>Welcome Back</h2>
+          <p>Enter account credentials to login</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-bottom">
+        <ion-col>
+          <ion-list mode="ios">
+            <ion-item>
+              <ion-input formControlName="email" mode="ios" label="Email" labelPlacement="floating"
+                placeholder="Enter Your Email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="password" mode="ios" label="Password" labelPlacement="floating"
+                placeholder="Enter Your Password"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col class="ion-padding">
+          <ion-button mode="ios" expand="block" color="warning" type="submit" (click)="submitForm()"
+            [disabled]="loginForm?.invalid">LOGIN</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-padding">
+          <p>Problem in login <a href="#" [routerLink]="['/forget-password']">Forget Password</a></p>
+          <p class="ion-padding-top">No account yet <strong (click)="redirectToRegister()">Register</strong></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

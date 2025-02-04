@@ -31,7 +31,7 @@
 
 <ion-footer mode="ios">
   <ion-toolbar>
-      <ion-card color="medium" [mode]="'ios'" [button]="true" class="main-menu-card" [routerLink]="['/login']">
+      <ion-card color="medium" [mode]="'ios'" [button]="true" class="main-menu-card" (click)="logout()">
         <ion-card-content class="home-card-content">
           <ion-icon name="log-out-outline"></ion-icon>
           <p>Logout</p>
