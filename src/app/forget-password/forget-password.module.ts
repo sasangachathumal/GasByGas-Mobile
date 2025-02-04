@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -10,8 +11,10 @@ import { ForgetPasswordPage } from './forget-password.page';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     ForgetPasswordPageRoutingModule
   ],

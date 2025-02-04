@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
               const toast = await this.toastController.create({
                 message: 'Login Successful',
                 duration: 1500,
-                position: 'bottom',
+                position: 'top',
                 mode: 'ios',
                 color: 'success',
               });
@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
               const toast = await this.toastController.create({
                 message: 'Login fail, Try again',
                 duration: 3000,
-                position: 'bottom',
+                position: 'top',
                 mode: 'ios',
                 color: 'danger',
                 icon: 'alert-outline'
@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
           const toast = await this.toastController.create({
             message: 'Login fail, Try again',
             duration: 3000,
-            position: 'bottom',
+            position: 'top',
             mode: 'ios',
             color: 'danger',
             icon: 'alert-outline'
