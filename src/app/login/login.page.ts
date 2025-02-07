@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
     private service: AuthService,
     private toastController: ToastController,
     private router: Router,
-  private storage: LocalStorageService) { }
+    private storage: LocalStorageService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -36,50 +36,63 @@ export class LoginPage implements OnInit {
   submitForm(): void {
     if (this.loginForm?.valid) {
       this.service.login(this.loginForm.value)
-      .subscribe(
-        (response)=> {
-          this.storage.set('access_token', response.access_token);
-          this.service.me(response.access_token)
-          .subscribe(
-            async(response) => {
-              this.storage.set('me', response.data);
-              const toast = await this.toastController.create({
-                message: 'Login Successful',
-                duration: 1500,
-                position: 'top',
-                mode: 'ios',
-                color: 'success',
-              });
-              await toast.present();
-              this.router.navigate(['/home']);
-            },
-            async(error) => {
-              this.storage.clear();
-              const toast = await this.toastController.create({
-                message: 'Login fail, Try again',
-                duration: 3000,
-                position: 'top',
-                mode: 'ios',
-                color: 'danger',
-                icon: 'alert-outline'
-              });
-              await toast.present();
-            }
-          );
-        },
-        async(error) => {
-          this.storage.clear();
-          const toast = await this.toastController.create({
-            message: 'Login fail, Try again',
-            duration: 3000,
-            position: 'top',
-            mode: 'ios',
-            color: 'danger',
-            icon: 'alert-outline'
-          });
-          await toast.present();
-        }
-      );
+        .subscribe(
+          (response) => {
+            this.storage.set('access_token', response.access_token);
+            this.service.me(response.access_token)
+              .subscribe(
+                async (response) => {
+                  this.storage.set('me', response.data);
+                  if (response.data.type != 'CONSUMER') {
+                    this.storage.clear();
+                    const toast = await this.toastController.create({
+                      message: 'Mobile app only accessible for customers. Please login with valid account.',
+                      duration: 3000,
+                      position: 'top',
+                      mode: 'ios',
+                      color: 'danger',
+                      icon: 'alert-outline'
+                    });
+                    await toast.present();
+                    return;
+                  }
+                  const toast = await this.toastController.create({
+                    message: 'Login Successful',
+                    duration: 1500,
+                    position: 'top',
+                    mode: 'ios',
+                    color: 'success',
+                  });
+                  await toast.present();
+                  this.router.navigate(['/home']);
+                },
+                async (error) => {
+                  this.storage.clear();
+                  const toast = await this.toastController.create({
+                    message: 'Login fail, Try again',
+                    duration: 3000,
+                    position: 'top',
+                    mode: 'ios',
+                    color: 'danger',
+                    icon: 'alert-outline'
+                  });
+                  await toast.present();
+                }
+              );
+          },
+          async (error) => {
+            this.storage.clear();
+            const toast = await this.toastController.create({
+              message: 'Login fail, Try again',
+              duration: 3000,
+              position: 'top',
+              mode: 'ios',
+              color: 'danger',
+              icon: 'alert-outline'
+            });
+            await toast.present();
+          }
+        );
     }
   }
 

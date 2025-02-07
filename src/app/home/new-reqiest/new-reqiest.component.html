@@ -6,36 +6,47 @@
     <ion-title>New Request</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding content" mode="ios">
+<ion-content class="ion-padding content" mode="ios" [forceOverscroll]="false">
   <ion-list lines="full" class="">
     <ion-item>
-      <ion-select label="Select Gas Outlet" aria-label="outlet">
-        <ion-select-option value="apples">Apples</ion-select-option>
-        <ion-select-option value="oranges">Oranges</ion-select-option>
-        <ion-select-option value="bananas">Bananas</ion-select-option>
+      <ion-select label="Select Gas Outlet" aria-label="outlet" placeholder="Select the outlet"
+        [(ngModel)]="selectedOutletId" (ionChange)="onOutletChange()">
+        @for (outlet of outletList; track outlet.id) {
+        <ion-select-option value="{{outlet.id}}">{{outlet.name}}</ion-select-option>
+        } @empty {
+        <ion-select-option value="-1">~ no outlet to select ~</ion-select-option>
+        }
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-input label="Available Quantity" value="20" readonly [disabled]="true"></ion-input>
+      <ion-input label="Available Quantity" placeholder="20" readonly [disabled]="true"
+        [(ngModel)]="selectedOutletQuantity"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-select label="Select Gas Type" aria-label="gas">
-        <ion-select-option value="apples">Apples</ion-select-option>
-        <ion-select-option value="oranges">Oranges</ion-select-option>
-        <ion-select-option value="bananas">Bananas</ion-select-option>
+      <ion-select label="Select Gas Type" aria-label="gas" placeholder="Select the gas" [(ngModel)]="selectedGasTypeId"
+        (ionChange)="onGasTypeChange()">
+        @for (gasType of gasTypeList; track gasType.id) {
+        <ion-select-option value="{{gasType.id}}">{{gasType.weight}}</ion-select-option>
+        } @empty {
+        <ion-select-option value="-1">~ no gas to select ~</ion-select-option>
+        }
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-input label="Gas Price" value="2000.00 LKR" readonly [disabled]="true"></ion-input>
+      <ion-input label="Gas Price" placeholder="2000.00 LKR" readonly [disabled]="true"
+        [(ngModel)]="selectedGasTypePrice"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input value="" [clearInput]="true" type="number">
+      <ion-input value="" [clearInput]="true" type="number" [(ngModel)]="requestQuentity"
+        (ngModelChange)="onQuantityChange()">
         <div slot="label">Quantity <ion-text color="danger">*</ion-text></div>
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input label="Total Payment" value="2000.00 LKR" readonly [disabled]="true"></ion-input>
+      <ion-input label="Total Payment" placeholder="2000.00 LKR" readonly [disabled]="true"
+        [(ngModel)]="requestTotalPrice"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="block" class="ion-margin-top" color="warning">Submit</ion-button>
+  <ion-button expand="block" class="ion-margin-top" color="warning" (click)="createNewGasRequest()"
+    [disabled]="submitBtnDisable()">Submit</ion-button>
 </ion-content>

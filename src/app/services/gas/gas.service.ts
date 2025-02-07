@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 import { environment } from "../../../environments/environment";
 import { LocalStorageService } from "../storage/local-storage.service";
 
+export interface GasType {
+  id:number;
+  price:string;
+  weight: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +22,8 @@ export class GasService {
 
   // API request headers
   private httpHeaders: HttpHeaders = new HttpHeaders({
-    Authorization: `Bearer ${this.localStorageService.get('access_token')}`
+    Authorization: `Bearer ${this.localStorageService.get('access_token')}`,
+    "ngrok-skip-browser-warning": "69420",
   });
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) { }

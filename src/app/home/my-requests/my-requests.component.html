@@ -1,4 +1,4 @@
-<ion-content class="content ion-padding">
+<ion-content class="content ion-padding" [forceOverscroll]="false">
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col size="2">
@@ -12,36 +12,48 @@
     </ion-row>
   </ion-grid>
   <ion-grid class="ion-no-padding ion-no-margin">
+    @for (request of userRequestList; track request.request.id) {
     <ion-row class="ion-no-padding ion-no-margin">
       <ion-col class="ion-no-padding ion-no-margin">
         <ion-card [mode]="'ios'" class="main-menu-card">
           <ion-card-header>
             <ion-card-subtitle>
-              <ion-chip color="warning">Pending</ion-chip>
+              @if (request.request.status === 'PENDING') {
+                <ion-chip color="warning">{{request.request.status}}</ion-chip>
+              }
+              @else if (request.request.status === 'PAID') {
+                <ion-chip color="primary">{{request.request.status}}</ion-chip>
+              }
+              @else if (request.request.status === 'COMPLETED') {
+                <ion-chip color="success">{{request.request.status}}</ion-chip>
+              }
+              @else {
+                <ion-chip color="danger">{{request.request.status}}</ion-chip>
+              }
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  2025 / 02 /11
+                  {{request.schedule.schedule_date}}
                 </ion-col>
               </ion-row>
             </ion-grid>
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  2.3KG
+                  {{request.gas.weight}}
                 </ion-col>
                 <ion-col>
-                  1 Gas Cylinder
+                  {{request.request.quantity}} Gas Cylinder {{request.request.quantity > 1 ? 's' : ''}}
                 </ion-col>
               </ion-row>
             </ion-grid>
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  Perera Stores
+                  {{request.outlet.name}}
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -49,42 +61,16 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-no-padding ion-no-margin">
-      <ion-col class="ion-no-padding ion-no-margin">
-        <ion-card [mode]="'ios'" class="main-menu-card">
-          <ion-card-header>
-            <ion-card-subtitle>
-              <ion-chip color="success">Completed</ion-chip>
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  2025 / 01 / 30
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  12.5KG
-                </ion-col>
-                <ion-col>
-                  10 Gas Cylinders
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  Perera Stores
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    } @empty {
+      <ion-row class="ion-no-padding ion-no-margin">
+        <ion-col class="ion-no-padding ion-no-margin">
+          <ion-card [mode]="'ios'" class="main-menu-card">
+            <ion-card-content>
+              You'r gas request will appear here
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    }
   </ion-grid>
 </ion-content>
